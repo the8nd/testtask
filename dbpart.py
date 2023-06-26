@@ -4,18 +4,18 @@ from information import username, password
 conn = Connection(username=username, password=password)
 db = conn.createDatabase(name="userinfo")
 db = conn["userinfo"]
-userslinksCollection = db.createCollection(name="UsersLinks")
+usersfilesCollection = db.createCollection(name="UsersFiles")
 
 
 def new_user(user, link):
-    doc = userslinksCollection.createDocument()
+    doc = usersfilesCollection.createDocument()
     doc['login'] = user
-    doc['links'] = [link]
+    doc['files'] = [link]
     doc._key = ''.join(user).lower()
     doc.save()
 
 
 def link_addder(user, link):
-    doc = userslinksCollection[user]
-    doc['links'] = doc['links'].append(link)
+    doc = usersfilesCollection[user]
+    doc['files'] = doc['files'].append(link)
     doc.save()
