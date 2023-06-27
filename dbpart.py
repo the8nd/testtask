@@ -2,9 +2,9 @@ from pyArango.connection import *
 from information import username, password
 
 conn = Connection(username=username, password=password)
-#db = conn.createDatabase(name="userinfo")
+#db = conn.createDatabase(name="userinfo") # Для первого запуска и создания БД
 db = conn["userinfo"]
-#usersfilesCollection = db.createCollection(name="UsersFiles")
+#usersfilesCollection = db.createCollection(name="UsersFiles") # Для первого запуска и создания коллекции
 usersfilesCollection = db.collections["UsersFiles"]
 
 
@@ -14,7 +14,6 @@ def new_user(user, link):
     doc['files'] = [link]
     doc._key = ''.join(user).lower()
     doc.save()
-    print(doc)
 
 
 def link_addder(user, link):
